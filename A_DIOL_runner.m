@@ -1,4 +1,4 @@
-%% Simulation of an ADIOL controlled bicopter
+%% Simulation of an A-DIOL controlled bicopter
 %
 % Author: Jhon Manuel Portella Delado
 % Advisor: Ankit Goel
@@ -20,6 +20,28 @@ clc
 close all
 clear all
 
+%% Printing properties
+set(0, 'DefaultFigureColor', 'default'); 
+set(0, 'DefaultTextFontSize', 16); 
+set(0, 'DefaultTextInterpreter', 'latex');
+set(0, 'DefaultLineLineWidth', 2);
+set(0, 'DefaultAxesFontSize', 16);
+
+co = [0 0 1;
+    1 0 0;
+    0 1 0;
+    0    0.4470    0.7410
+    0.8500    0.3250    0.0980
+    0.9290    0.6940    0.1250
+    0.4940    0.1840    0.5560
+    0.4660    0.6740    0.1880
+    0.3010    0.7450    0.9330
+    0.6350    0.0780    0.1840];
+
+set(0,'defaultAxesColorOrder',co)
+
+%% Linear Controller Gain Computation
+
 A = [zeros(3,1),eye(3),zeros(3,4);zeros(1,8);zeros(3,5),eye(3);zeros(1,8)];
 B = [zeros(3,2);[1 0];zeros(3,2);[0 1]];
 
@@ -30,13 +52,11 @@ p = [-4.5,-4.0,-5,-5.5,-4.5,-4.0,-5,-5.5];
 k = place(A,B,p);
 
 % Simulation
-out = sim('DE_IOL','StartTime','0','StopTime','110','FixedStep','1e-4');
+out = sim('A_DIOL_BicopterControl','StartTime','0','StopTime','110','FixedStep','1e-4');
 
 %% Elliptical trajectory path following
 clc
 close all
-
-printing_setup
 
 Time = out.tout;
 
@@ -168,7 +188,6 @@ ylh2.Position(1)=ylh2.Position(1)+dy;
 clc
 close all
 
-printing_setup
 Time = out.tout;
 
 rd_1 = out.rd_1_Hilbert.Data;
