@@ -1,3 +1,2 @@
-# Download all the files and copy them to your Matlab working folder.
-# Run simulation section first
-# Run any of the other plot sections 
+Adaptive Dynamic Input-Output Linearization-based Control of a Bicopter
+# Run A_DIOL_runner.m to execute the Simulink model and plot the figures
